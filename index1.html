@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Sia ✨</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#05030b;
+    color:#fff;
+}
+
+button{
+    font:inherit;
+}
+
+.page{
+    position:absolute;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+}
+
+.page.active{
+    display:flex;
+}
+
+.container{
+    width:min(900px,92%);
+    position:relative;
+    z-index:10;
+}
+
+h1{
+    font-size:clamp(2.5rem,7vw,6rem);
+}
+
+h2{
+    font-size:clamp(1.8rem,5vw,3.5rem);
+    margin-bottom:18px;
+}
+
+p{
+    font-size:clamp(1rem,2.2vw,1.25rem);
+    line-height:1.8;
+}
+
+.gradient{
+    background:linear-gradient(
+        90deg,
+        #ff7eb3,
+        #ffd166,
+        #c084fc
+    );
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.btn{
+    border:none;
+    color:white;
+    background:linear-gradient(
+        135deg,
+        #ff4f9a,
+        #8b5cf6
+    );
+    padding:15px 30px;
+    border-radius:50px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:25px;
+    box-shadow:0 0 30px rgba(255,80,170,.4);
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px) scale(1.04);
+    box-shadow:0 0 45px rgba(255,80,170,.7);
+}
+
+.subtle{
+    opacity:.6;
+    font-size:.9rem;
+    margin-top:15px;
+}
+
+/* =====================================
+   PAGE 1
+===================================== */
+
+#intro{
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(130,60,220,.35),
+            transparent 35%
+        ),
+        linear-gradient(#080719,#020108);
+}
+
+#stars{
+    position:absolute;
+    inset:0;
+}
+
+.star{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    animation:blink 2s infinite alternate;
+}
+
+@keyframes blink{
+    from{opacity:.15}
+    to{opacity:1}
+}
+
+.orb{
+    width:120px;
+    height:120px;
+    margin:35px auto;
+    border-radius:50%;
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            white,
+            #ff83c4 15%,
+            #7c3aed 55%,
+            transparent 72%
+        );
+    box-shadow:
+        0 0 30px #ff4fa3,
+        0 0 100px #7c3aed;
+    cursor:pointer;
+    animation:orbFloat 3s infinite ease-in-out;
+}
+
+@keyframes orbFloat{
+    50%{
+        transform:translateY(-12px);
+    }
+}
+
+/* =====================================
+   ENVELOPE
+===================================== */
+
+#letter{
+    background:
+        radial-gradient(
+            circle at center,
+            #32163d,
+            #08040c 70%
+        );
+}
+
+.envelope{
+    width:320px;
+    height:210px;
+    margin:35px auto;
+    position:relative;
+    cursor:pointer;
+    transition:.6s;
+}
+
+.envelope-body{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        135deg,
+        #ff719f,
+        #a855f7
+    );
+    border-radius:15px;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+
+.envelope-flap{
+    position:absolute;
+    top:0;
+    left:0;
+    width:0;
+    height:0;
+    border-left:160px solid transparent;
+    border-right:160px solid transparent;
+    border-top:110px solid #ff9fc0;
+    transform-origin:top;
+    transition:.7s;
+    z-index:3;
+}
+
+.envelope.open .envelope-flap{
+    transform:rotateX(180deg);
+}
+
+.envelope-note{
+    position:absolute;
+    width:80%;
+    left:10%;
+    height:140px;
+    bottom:20px;
+    background:#fff8fc;
+    color:#35132c;
+    border-radius:10px;
+    padding:25px;
+    z-index:1;
+    transition:.7s;
+}
+
+.envelope.open .envelope-note{
+    transform:translateY(-100px);
+}
+
+/* =====================================
+   MEMORY PAGE
+===================================== */
+
+#memories{
+    background:
+        linear-gradient(
+            135deg,
+            #120719,
+            #30102f,
+            #08040e
+        );
+}
+
+.memory-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:30px;
+}
+
+.memory-card{
+    height:190px;
+    border-radius:25px;
+    padding:20px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    cursor:pointer;
+    overflow:hidden;
+    position:relative;
+    border:1px solid rgba(255,255,255,.15);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,105,180,.3),
+            rgba(120,80,255,.2)
+        );
+    transition:.35s;
+}
+
+.memory-card:hover{
+    transform:translateY(-8px) scale(1.02);
+}
+
+.memory-card span{
+    position:relative;
+    z-index:2;
+    background:rgba(0,0,0,.45);
+    backdrop-filter:blur(8px);
+    border-radius:15px;
+    padding:10px;
+}
+
+.memory-card::before{
+    content:"✨";
+    position:absolute;
+    font-size:5rem;
+    opacity:.25;
+    top:30px;
+}
+
+/* =====================================
+   CHOICES
+===================================== */
+
+#choice{
+    background:
+        radial-gradient(
+            circle at center,
+            #4c1d4e,
+            #09030e 65%
+        );
+}
+
+.choice-buttons{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:35px;
+}
+
+.choice-btn{
+    border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.08);
+    color:white;
+    padding:25px 15px;
+    border-radius:22px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.choice-btn:hover{
+    transform:translateY(-7px);
+    background:rgba(255,100,180,.2);
+}
+
+.choice-result{
+    margin-top:25px;
+    min-height:80px;
+}
+
+/* =====================================
+   CONSTELLATION
+===================================== */
+
+#constellation{
+    background:
+        radial-gradient(
+            circle at center,
+            #172052,
+            #02030a 70%
+        );
+}
+
+.sky-star{
+    position:absolute;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:white;
+    box-shadow:0 0 15px white;
+    cursor:pointer;
+    animation:blink 2s infinite alternate;
+}
+
+.star-message{
+    position:absolute;
+    max-width:280px;
+    padding:18px;
+    border-radius:20px;
+    background:rgba(255,255,255,.1);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,.2);
+    opacity:0;
+    transform:translateY(10px);
+    transition:.4s;
+    pointer-events:none;
+}
+
+.star-message.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* =====================================
+   CAKE
+===================================== */
+
+#birthday{
+    background:
+        radial-gradient(
+            circle at center,
+            #50163f,
+            #09020e 70%
+        );
+}
+
+.cake{
+    width:280px;
+    height:230px;
+    position:relative;
+    margin:30px auto;
+}
+
+.layer{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    border-radius:20px;
+}
+
+.bottom{
+    bottom:15px;
+    width:260px;
+    height:75px;
+    background:linear-gradient(#ff78ae,#c72d70);
+}
+
+.middle{
+    bottom:80px;
+    width:210px;
+    height:65px;
+    background:linear-gradient(#ffb0cf,#dc4b88);
+}
+
+.top{
+    bottom:135px;
+    width:160px;
+    height:55px;
+    background:linear-gradient(#ffd0e0,#ee70a2);
+}
+
+.candle{
+    position:absolute;
+    width:15px;
+    height:55px;
+    bottom:190px;
+    left:50%;
+    transform:translateX(-50%);
+    background:white;
+    border-radius:5px;
+}
+
+.flame{
+    position:absolute;
+    width:25px;
+    height:35px;
+    left:-5px;
+    top:-30px;
+    background:orange;
+    border-radius:50% 50% 50% 0;
+    transform:rotate(-45deg);
+    box-shadow:0 0 25px orange;
+    animation:flame .5s infinite alternate;
+}
+
+@keyframes flame{
+    to{
+        transform:rotate(-45deg) scale(1.15);
+    }
+}
+
+.off{
+    display:none;
+}
+
+/* =====================================
+   FINAL
+===================================== */
+
+#final{
+    background:
+        radial-gradient(
+            circle at center,
+            #531344,
+            #08020c 70%
+        );
+}
+
+.final-heart{
+    font-size:6rem;
+    animation:heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat{
+    50%{
+        transform:scale(1.15);
+    }
+}
+
+.final-text{
+    max-width:720px;
+    margin:20px auto;
+}
+
+#particles{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media(max-width:650px){
+
+    .memory-grid{
+        grid-template-columns:1fr;
+    }
+
+    .memory-card{
+        height:110px;
+    }
+
+    .choice-buttons{
+        grid-template-columns:1fr;
+    }
+
+    .envelope{
+        transform:scale(.8);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="app">
+
+<!-- ==================================================
+     INTRO
+================================================== -->
+
+<section class="page active" id="intro">
+
+    <div id="stars"></div>
+
+    <div class="container">
+
+        <p class="subtle">
+            This isn't just another website...
+        </p>
+
+        <h1 class="gradient">
+            Hey Sia ✨
+        </h1>
+
+        <p>
+            Aaj tumhare liye ek chhoti si duniya banayi hai.
+            <br>
+            Aur usme har step par kuch hidden hai. 👀
+        </p>
+
+        <div class="orb" onclick="openEnvelope()"></div>
+
+        <p>
+            <b>Isse touch karo...</b>
+        </p>
+
+        <p class="subtle">
+            Adventure officially starts here 🌙
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     ENVELOPE
+================================================== -->
+
+<section class="page" id="letter">
+
+    <div class="container">
+
+        <p class="subtle">
+            Level 01
+        </p>
+
+        <h2>
+            Ek chhota sa envelope 💌
+        </h2>
+
+        <p>
+            Iske andar kuch hai...
+            <br>
+            but pehle ise open karna padega.
+        </p>
+
+        <div class="envelope" id="envelope" onclick="openLetter()">
+
+            <div class="envelope-note">
+                <b>For Sia ✨</b>
+                <br><br>
+                “Kuch cheezein explain nahi ki jaati...
+                bas experience ki jaati hain.”
+            </div>
+
+            <div class="envelope-body"></div>
+            <div class="envelope-flap"></div>
+
+        </div>
+
+        <button
+            class="btn"
+            id="letterNext"
+            style="display:none"
+            onclick="go('memories')"
+        >
+            Aage dekho →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     MEMORIES
+================================================== -->
+
+<section class="page" id="memories">
+
+    <div class="container">
+
+        <p class="subtle">
+            Level 02 — Little Things
+        </p>
+
+        <h2>
+            Kuch moments ✨
+        </h2>
+
+        <p>
+            Har card ke andar ek chhoti si baat hai.
+            <br>
+            Sabko open karna zaroori hai. 👀
+        </p>
+
+        <div class="memory-grid">
+
+            <div class="memory-card" onclick="memory(0)">
+                <span>🌸 Ek random moment</span>
+            </div>
+
+            <div class="memory-card" onclick="memory(1)">
+                <span>🌙 Ek late-night thought</span>
+            </div>
+
+            <div class="memory-card" onclick="memory(2)">
+                <span>✨ Ek hidden compliment</span>
+            </div>
+
+        </div>
+
+        <div id="memoryText" class="choice-result"></div>
+
+        <button
+            class="btn"
+            id="memoryNext"
+            style="display:none"
+            onclick="go('choice')"
+        >
+            Continue ✨
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     CHOICE
+================================================== -->
+
+<section class="page" id="choice">
+
+    <div class="container">
+
+        <p class="subtle">
+            Level 03 — Your Choice
+        </p>
+
+        <h2>
+            Aaj ka mood kya hai? 👀
+        </h2>
+
+        <p>
+            Ek choose karo.
+            <br>
+            Website uske according reply karegi.
+        </p>
+
+        <div class="choice-buttons">
+
+            <button
+                class="choice-btn"
+                onclick="chooseMood('happy')"
+            >
+                😌<br>
+                Chill
+            </button>
+
+            <button
+                class="choice-btn"
+                onclick="chooseMood('crazy')"
+            >
+                🤪<br>
+                Crazy
+            </button>
+
+            <button
+                class="choice-btn"
+                onclick="chooseMood('soft')"
+            >
+                🌙<br>
+                Soft
+            </button>
+
+        </div>
+
+        <div
+            id="choiceResult"
+            class="choice-result"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     CONSTELLATION
+================================================== -->
+
+<section class="page" id="constellation">
+
+    <div class="container">
+
+        <p class="subtle">
+            Level 04 — Night Sky
+        </p>
+
+        <h2>
+            Kuch stars tumhare liye hain 🌌
+        </h2>
+
+        <p>
+            Stars ko touch karo.
+            <br>
+            Har star mein ek tiny message hidden hai.
+        </p>
+
+    </div>
+
+    <div id="sky"></div>
+
+</section>
+
+
+<!-- ==================================================
+     BIRTHDAY
+================================================== -->
+
+<section class="page" id="birthday">
+
+    <div class="container">
+
+        <p class="subtle">
+            Final Level 🎂
+        </p>
+
+        <h2>
+            Okay... ab actual birthday moment.
+        </h2>
+
+        <p>
+            Ek wish karo.
+            <br>
+            Phir candle off karo. ✨
+        </p>
+
+        <div class="cake">
+
+            <div class="layer bottom"></div>
+            <div class="layer middle"></div>
+            <div class="layer top"></div>
+
+            <div class="candle">
+                <div class="flame" id="flame"></div>
+            </div>
+
+        </div>
+
+        <button
+            class="btn"
+            onclick="blowCandle()"
+        >
+            🕯️ Wish + Blow Candle
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     FINAL
+================================================== -->
+
+<section class="page" id="final">
+
+    <div id="particles"></div>
+
+    <div class="container">
+
+        <div class="final-heart">
+            💖
+        </div>
+
+        <p class="subtle">
+            Mission Completed
+        </p>
+
+        <h1 class="gradient">
+            Happy Birthday, Sia ✨
+        </h1>
+
+        <div
+            class="final-text"
+            id="finalText"
+        ></div>
+
+        <p class="subtle">
+            Some people deserve more than just a “Happy Birthday”.
+            <br>
+            So... this little world was made for you. 🌙
+        </p>
+
+        <button
+            class="btn"
+            onclick="location.reload()"
+        >
+            🔁 Experience Again
+        </button>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+function go(id){
+
+    document.querySelectorAll(".page")
+        .forEach(p => p.classList.remove("active"));
+
+    document.getElementById(id)
+        .classList.add("active");
+
+}
+
+
+/* =========================================
+   BACKGROUND STARS
+========================================= */
+
+const stars=document.getElementById("stars");
+
+for(let i=0;i<100;i++){
+
+    const star=document.createElement("div");
+
+    star.className="star";
+
+    star.style.left=Math.random()*100+"%";
+    star.style.top=Math.random()*100+"%";
+
+    star.style.animationDelay=
+        Math.random()*2+"s";
+
+    stars.appendChild(star);
+
+}
+
+
+/* =========================================
+   INTRO
+========================================= */
+
+function openEnvelope(){
+
+    go("letter");
+
+}
+
+
+/* =========================================
+   ENVELOPE
+========================================= */
+
+function openLetter(){
+
+    const envelope=
+        document.getElementById("envelope");
+
+    envelope.classList.add("open");
+
+    setTimeout(()=>{
+
+        document.getElementById("letterNext")
+            .style.display="inline-block";
+
+    },900);
+
+}
+
+
+/* =========================================
+   MEMORIES
+========================================= */
+
+let openedMemories=0;
+
+const memoryMessages=[
+
+    "Kabhi-kabhi ek simple sa moment bhi unexpectedly special ban jaata hai. 🌸",
+
+    "Kuch conversations chhoti hoti hain... but unka effect kaafi long-lasting hota hai. 🌙",
+
+    "Aur ek honest compliment: tumhari presence mein ek alag hi kind of energy hai. ✨"
+
+];
+
+function memory(index){
+
+    document.getElementById("memoryText")
+        .innerHTML=
+        `<b>${memoryMessages[index]}</b>`;
+
+    openedMemories++;
+
+    if(openedMemories>=3){
+
+        document.getElementById("memoryNext")
+            .style.display="inline-block";
+
+    }
+
+}
+
+
+/* =========================================
+   MOOD CHOICE
+========================================= */
+
+function chooseMood(type){
+
+    const result=
+        document.getElementById("choiceResult");
+
+    if(type==="happy"){
+
+        result.innerHTML=`
+            <b>😌 Chill mode activated.</b>
+            <br>
+            Aaj bas smile, cake aur good vibes allowed hain. ✨
+            <br>
+            <button class="btn" onclick="go('constellation')">
+                Next 🌌
+            </button>
+        `;
+
+    }
+
+    if(type==="crazy"){
+
+        result.innerHTML=`
+            <b>🤪 Ohhh... crazy mode!</b>
+            <br>
+            Theek hai, phir boring birthday allowed nahi hai. 😂
+            <br>
+            <button class="btn" onclick="go('constellation')">
+                Let's go 🚀
+            </button>
+        `;
+
+    }
+
+    if(type==="soft"){
+
+        result.innerHTML=`
+            <b>🌙 Soft mode.</b>
+            <br>
+            Then let's slow things down for a moment...
+            <br>
+            <button class="btn" onclick="go('constellation')">
+                Look at the stars ✨
+            </button>
+        `;
+
+    }
+
+}
+
+
+/* =========================================
+   CONSTELLATION
+========================================= */
+
+const sky=document.getElementById("sky");
+
+const messages=[
+
+    "Tumhari smile genuinely notice karne wali cheez hai. ✨",
+
+    "Life mein bahut saare moments aayenge — hopefully unmein kaafi happy ones honge. 🌙",
+
+    "Aaj ka din tumhara hai. Thoda extra smile allowed hai. 😌",
+
+    "Don't forget: small moments bhi memories ban sakte hain. 💫",
+
+    "Okay... last star ke paas actual surprise hai 👀"
+
+];
+
+let starsClicked=0;
+
+for(let i=0;i<messages.length;i++){
+
+    const star=document.createElement("div");
+
+    star.className="sky-star";
+
+    const x=10+Math.random()*80;
+    const y=15+Math.random()*70;
+
+    star.style.left=x+"%";
+    star.style.top=y+"%";
+
+    const message=document.createElement("div");
+
+    message.className="star-message";
+
+    message.textContent=messages[i];
+
+    message.style.left=
+        Math.min(72,Math.max(5,x-8))+"%";
+
+    message.style.top=
+        Math.min(75,Math.max(12,y+5))+"%";
+
+    star.onclick=()=>{
+
+        document.querySelectorAll(".star-message")
+            .forEach(m=>m.classList.remove("show"));
+
+        message.classList.add("show");
+
+        starsClicked++;
+
+        if(i===messages.length-1){
+
+            setTimeout(()=>{
+                go("birthday");
+            },3500);
+
+        }
+
+    };
+
+    sky.appendChild(star);
+    sky.appendChild(message);
+
+}
+
+
+/* =========================================
+   CAKE
+========================================= */
+
+function blowCandle(){
+
+    document.getElementById("flame")
+        .classList.add("off");
+
+    confetti();
+
+    setTimeout(()=>{
+
+        go("final");
+
+        typeFinalMessage();
+
+    },1200);
+
+}
+
+
+/* =========================================
+   FINAL MESSAGE
+========================================= */
+
+function typeFinalMessage(){
+
+    const text=
+    `Sia, aaj ke din bas itna kehna hai —
+    I hope tumhari life mein hamesha reasons rahen smile karne ke.
+    Jo dreams hain, unke liye confidence rahe,
+    jo log important hain, unke saath beautiful memories banti rahein,
+    aur tum apni individuality kabhi lose na karo.
+    
+    Happy Birthday once again. ✨
+    
+    Ye website sirf ek surprise nahi thi...
+    ye ek chhoti si memory thi jo hopefully tumhe yaad rahegi. 💖`;
+
+    const element=
+        document.getElementById("finalText");
+
+    let index=0;
+
+    const words=text.split(" ");
+
+    const interval=setInterval(()=>{
+
+        if(index>=words.length){
+
+            clearInterval(interval);
+
+            fireworks();
+
+            return;
+        }
+
+        element.textContent+=
+            (index===0 ? "" : " ")
+            +words[index];
+
+        index++;
+
+    },45);
+
+}
+
+
+/* =========================================
+   CONFETTI
+========================================= */
+
+function confetti(){
+
+    for(let i=0;i<100;i++){
+
+        const c=document.createElement("div");
+
+        c.style.position="fixed";
+        c.style.width="8px";
+        c.style.height="12px";
+
+        c.style.left="50%";
+        c.style.top="50%";
+
+        c.style.background=
+        ["#ff4f9a","#ffd166","#8b5cf6","#60a5fa","#fff"]
+        [Math.floor(Math.random()*5)];
+
+        c.style.zIndex="9999";
+
+        c.style.transition=
+            "1.5s ease";
+
+        document.body.appendChild(c);
+
+        requestAnimationFrame(()=>{
+
+            c.style.transform=
+            `translate(
+                ${(Math.random()-.5)*700}px,
+                ${(Math.random()-.5)*600}px
+            )
+            rotate(${Math.random()*700}deg)`;
+
+            c.style.opacity="0";
+
+        });
+
+        setTimeout(()=>{
+            c.remove();
+        },1700);
+
+    }
+
+}
+
+
+/* =========================================
+   FIREWORKS
+========================================= */
+
+function fireworks(){
+
+    const area=
+        document.getElementById("particles");
+
+    for(let burst=0;burst<10;burst++){
+
+        setTimeout(()=>{
+
+            const x=Math.random()*100;
+            const y=10+Math.random()*65;
+
+            for(let i=0;i<35;i++){
+
+                const p=document.createElement("div");
+
+                p.style.position="absolute";
+
+                p.style.left=x+"%";
+                p.style.top=y+"%";
+
+                p.style.width="5px";
+                p.style.height="5px";
+
+                p.style.borderRadius="50%";
+
+                p.style.background="white";
+
+                const angle=
+                    Math.random()*Math.PI*2;
+
+                const distance=
+                    40+Math.random()*180;
+
+                p.style.transition=
+                    "1.1s ease";
+
+                area.appendChild(p);
+
+                requestAnimationFrame(()=>{
+
+                    p.style.transform=
+                    `translate(
+                        ${Math.cos(angle)*distance}px,
+                        ${Math.sin(angle)*distance}px
+                    )`;
+
+                    p.style.opacity="0";
+
+                });
+
+                setTimeout(()=>{
+                    p.remove();
+                },1200);
+
+            }
+
+        },burst*450);
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
